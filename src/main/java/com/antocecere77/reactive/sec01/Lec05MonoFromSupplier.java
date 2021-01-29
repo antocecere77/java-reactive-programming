@@ -3,6 +3,9 @@ package com.antocecere77.reactive.sec01;
 import com.antocecere77.reactive.courseutil.Util;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
+
 public class Lec05MonoFromSupplier {
 
     public static void main(String[] args) {
@@ -10,11 +13,18 @@ public class Lec05MonoFromSupplier {
         //use just only when you have data alrealdy
         //Mono.just(getName());
 
-        Mono<String> mono = Mono.fromSupplier(() -> getName());
+        Supplier<String> stringSupplier = () -> getName();
+        Mono<String> mono = Mono.fromSupplier(stringSupplier);
 
         mono.subscribe(
                 Util.onNext()
         );
+
+        Callable<String> stringCallable = () -> getName();
+        Mono.fromCallable(stringCallable)
+                .subscribe(
+                        Util.onNext()
+                );
     }
 
     private static String getName() {
