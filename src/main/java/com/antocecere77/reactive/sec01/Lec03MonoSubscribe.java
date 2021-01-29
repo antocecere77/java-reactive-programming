@@ -1,5 +1,6 @@
 package com.antocecere77.reactive.sec01;
 
+import com.antocecere77.reactive.courseutil.Util;
 import reactor.core.publisher.Mono;
 
 public class Lec03MonoSubscribe {
@@ -18,14 +19,14 @@ public class Lec03MonoSubscribe {
         //pusblisher
         final var monoInteger = Mono.just("ball")
                 .map(String::length)
-                .map(l -> l / 0);
+                .map(l -> l / 1);
 
         monoInteger.subscribe();
 
         monoInteger.subscribe(
-                item -> System.out.println(item),
-                err -> System.out.println(err.getMessage()),
-                () -> System.out.println("Completed")
+                Util.onNext(),
+                Util.onError(),
+                Util.onComplete()
         );
     }
 }
