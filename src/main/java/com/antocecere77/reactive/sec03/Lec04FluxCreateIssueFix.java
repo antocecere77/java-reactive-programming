@@ -10,15 +10,17 @@ public class Lec04FluxCreateIssueFix {
         //only one instance of fluxsink
         Flux.create(fluxSink -> {
             String country;
+            int counter = 0;
             do{
                 country = Util.faker().country().name();
                 System.out.println("emitting: " + country);
                 fluxSink.next(country);
-            } while(!country.equalsIgnoreCase("canada")  && !fluxSink.isCancelled());
+                counter++;
+            } while(!country.equalsIgnoreCase("canada")  && !fluxSink.isCancelled() && counter<10);
 
             fluxSink.complete();
         })
-        .take(3)
+        //.take(3)
         .subscribe(Util.subscriber());
     }
 }
