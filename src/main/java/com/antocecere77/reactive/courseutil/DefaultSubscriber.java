@@ -5,13 +5,16 @@ import lombok.NoArgsConstructor;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-@NoArgsConstructor
 public class DefaultSubscriber implements Subscriber<Object> {
 
     private String name;
 
     public DefaultSubscriber(String name) {
         this.name = name + " - ";
+    }
+
+    public DefaultSubscriber() {
+        this.name = "";
     }
 
     @Override
