@@ -6,24 +6,25 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 import java.util.stream.Stream;
 
-public class Lec2HotPublisher {
-
+public class Lec03HotPublish {
 
     public static void main(String[] args) {
 
+        // share = publish().refCount(1)
         Flux<String> movieStream = Flux.fromStream(() -> getMovie())
                 .delayElements(Duration.ofSeconds(2))
-                .share();
+                .publish()
+                .refCount(2);
 
         movieStream.subscribe(Util.subscriber("sam"));
 
-        Util.sleepSeconds(3);
+        Util.sleepSeconds(5);
 
         movieStream.subscribe(Util.subscriber("mike"));
         Util.sleepSeconds(60);
     }
 
-    //Movie-theatre
+    //Neflix
     private static Stream<String> getMovie() {
         System.out.println("Got the movie stream req");
         return Stream.of(
