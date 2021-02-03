@@ -12,6 +12,7 @@ public class Lec06Parallel {
                 .parallel()
                 .runOn(Schedulers.parallel())
                 .doOnNext(i -> printThreadName("next " + i))
+                //.sequential()
                 .subscribe(v -> printThreadName("sub " + v));
 
         Util.sleepSeconds(5);
