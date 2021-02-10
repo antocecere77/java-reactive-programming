@@ -15,7 +15,7 @@ public class SlackMember {
         return name;
     }
 
-    public void receive(String message) {
+    void receive(String message) {
         System.out.println(message);
     }
 
@@ -23,7 +23,7 @@ public class SlackMember {
         this.messageConsumer.accept(message);
     }
 
-    public void setMessageConsumer(Consumer<String> messageConsumer) {
+    void setMessageConsumer(Consumer<String> messageConsumer) {
         this.messageConsumer = messageConsumer;
     }
 }
