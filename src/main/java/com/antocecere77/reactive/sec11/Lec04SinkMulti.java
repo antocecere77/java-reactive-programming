@@ -9,7 +9,7 @@ public class Lec04SinkMulti {
     public static void main(String[] args) {
 
         //Handle through which we would push items
-        Sinks.Many<Object> sink = Sinks.many().multicast().onBackpressureBuffer();
+        Sinks.Many<Object> sink = Sinks.many().multicast().directAllOrNothing();
 
         // handle through which subscribers will receive items
         Flux<Object> flux = sink.asFlux();
@@ -20,5 +20,8 @@ public class Lec04SinkMulti {
         flux.subscribe(Util.subscriber("sam"));
         flux.subscribe(Util.subscriber("mike"));
         sink.tryEmitNext("?");
+
+        flux.subscribe(Util.subscriber("mike"));
+        sink.tryEmitNext("new msg");
     }
 }
