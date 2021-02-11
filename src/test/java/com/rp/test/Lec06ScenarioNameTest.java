@@ -5,7 +5,7 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 import reactor.test.StepVerifierOptions;
 
-public class Lex06ScenarioNameTest {
+public class Lec06ScenarioNameTest {
 
     @Test
     public void test1() {
